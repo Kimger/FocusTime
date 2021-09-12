@@ -1,0 +1,38 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!--转圈进度条-->
+    <style name="progress_dialog" parent="@style/Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@color/trans_gray</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="SwitchCompat.Control" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/yellow</item>
+        <item name="colorSwitchThumbNormal">@color/red</item>
+        <item name="android:colorForeground">@color/red_500</item>
+    </style>
+
+    <style name="SwitchCompat.Text" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">9dp</item>
+    </style>
+
+    <style name="SwitchStyle" parent="AppTheme">
+        <item name="colorAccent">@color/colorTheme</item>
+    </style>
+
+
+</resources>
