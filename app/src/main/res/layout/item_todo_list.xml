@@ -9,10 +9,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_root"
-        app:layout_itemType="main"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/shape_card_bg_1">
+        android:background="@drawable/shape_card_bg_1"
+        app:layout_itemType="main">
 
         <TextView
             android:id="@+id/tv_item_title"
@@ -50,13 +50,26 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_finish_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="30dp"
+            android:text=""
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_item_time" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
-        android:layout_marginLeft="10dp"
         android:id="@+id/delete"
         android:layout_width="80dp"
         android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
         android:background="@drawable/shape_card_delete"
         app:layout_itemType="menu">
 

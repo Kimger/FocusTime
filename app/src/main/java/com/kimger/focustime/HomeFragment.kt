@@ -39,13 +39,16 @@ class HomeFragment : BaseFragment() {
             holder.itemView.tv_item_title.text = todoBean.title
             holder.itemView.tv_item_time.text = "${Helper.get().time2m(todoBean.time)}分钟"
             holder.itemView.tv_item_start.setOnClickListener { start(todoBean) }
+            if (todoBean.finishNumber != 0) {
+                holder.itemView.tv_finish_number.text = "完成${todoBean.finishNumber}次"
+            }
             holder.itemView.delete.setOnClickListener {
                 launch(Dispatchers.IO) {
                     DatabaseManager.dataBase.todoDao().deleteTodo(todoBean)
                 }
             }
 
-        })
+        }, emptyLayoutResId = R.layout.empty_todo_list)
         rv_todo_list.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(mActivity))
 
         launch(Dispatchers.IO) {
@@ -76,10 +79,12 @@ class HomeFragment : BaseFragment() {
             startActivity(intent)
         } else {
             EasyFloat.with(mActivity)
+                .setTag("doing")
                 .setLayout(R.layout.activity_doing) {
                     val doingView = it.findViewById<DoingView>(R.id.doingView)
                     doingView.setTodoData(data)
-                    doingView.setOnStopListener { EasyFloat.dismiss() }
+                    doingView.setOnStopListener { EasyFloat.dismiss("doing") }
+                    doingView.setFragmentManager(childFragmentManager)
                 }
                 .setImmersionStatusBar(true)
                 .setShowPattern(ShowPattern.ALL_TIME)

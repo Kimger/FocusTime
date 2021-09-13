@@ -17,14 +17,11 @@ class AddToDoDialog : BaseDialog() {
     override fun getLayoutId() = R.layout.dialog_add_todo
 
     override fun init(view: View) {
-//        et_input.requestFocus()
-//        showKeyboard(et_input)
         tv_commit.setOnClickListener {
             val title = et_input.text.trim().toString()
             val time = et_input_time.text.trim().toString()
-            val todoBean = TodoListEntity(title, time.toLong() * 60 )
+            val todoBean = TodoListEntity(title, time.toLong() * 60)
             DatabaseManager.dataBase.todoDao().insertTodo(todoBean)
-//            Cache.saveCache("todo", todoBean)
             dismiss()
         }
     }

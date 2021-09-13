@@ -29,6 +29,9 @@ class MineFragment : BaseFragment() {
                 closeLockMode()
             }
         }
+        rl_history.setOnClickListener {
+            startActivity(RecordActivity::class.java)
+        }
     }
 
     private fun setLockMode() {

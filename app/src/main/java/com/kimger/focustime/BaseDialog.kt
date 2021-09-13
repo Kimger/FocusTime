@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 /**
@@ -89,7 +90,7 @@ abstract class BaseDialog : DialogFragment() {
      * 显示加载对话框
      */
     fun startLoading() {
-        GlobalScope.launch(Dispatchers.Main) {
+        MainScope().launch(Dispatchers.Main) {
             if (loadingDialog != null) {
                 if (!loadingDialog!!.isShowing) {
                     loadingDialog!!.show()
@@ -105,7 +106,7 @@ abstract class BaseDialog : DialogFragment() {
      * 隐藏加载对话框
      */
     fun endLoading() {
-        GlobalScope.launch(Dispatchers.Main) {
+        MainScope().launch(Dispatchers.Main) {
             if (loadingDialog != null && loadingDialog!!.isShowing) {
                 loadingDialog!!.dismiss()
                 loadingDialog = null

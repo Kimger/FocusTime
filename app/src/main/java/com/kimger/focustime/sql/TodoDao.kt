@@ -1,9 +1,6 @@
 package com.kimger.focustime.sql
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.kimger.focustime.sql.entity.TodoListEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -12,9 +9,12 @@ interface TodoDao {
     @Query("select * from todoList")
     fun getTodoList(): Flow<List<TodoListEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTodo(entity: TodoListEntity)
 
     @Delete
     fun deleteTodo(entity: TodoListEntity)
+
+    @Update
+    fun updateTodo(entity: TodoListEntity)
 }

@@ -1,5 +1,7 @@
 package com.kimger.focustime
 
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.random.Random
 
 /**
@@ -61,6 +63,12 @@ class Helper {
         }
     }
 
+    fun long2Str(long: Long): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val date = Date(long)
+        return dateFormat.format(date)
+    }
+
     private val cardBgList = arrayOf(
         R.drawable.shape_card_bg_1,
         R.drawable.shape_card_bg_2,
@@ -72,7 +80,20 @@ class Helper {
     )
 
     fun getRandomBackground(): Int {
-        val randomInt = Random.nextInt(0, 6)
+        val randomInt = (0..6).random()
         return cardBgList[randomInt]
+    }
+
+    private val doingBgList = arrayOf(
+        R.mipmap.bg_doing_1,
+        R.mipmap.bg_doing_2,
+        R.mipmap.bg_doing_3,
+        R.mipmap.bg_doing_4,
+        R.mipmap.bg_doing_5,
+    )
+
+    fun getRandomDoingBackground(): Int {
+        val randomInt = (0..4).random()
+        return doingBgList[randomInt]
     }
 }

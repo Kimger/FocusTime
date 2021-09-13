@@ -10,6 +10,7 @@ object DatabaseManager {
     val dataBase:AppDataBase by lazy {
         Room.databaseBuilder(App.instance.applicationContext,AppDataBase::class.java, DB_NAME)
             .addCallback(CreateCallback)
+            .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
     }

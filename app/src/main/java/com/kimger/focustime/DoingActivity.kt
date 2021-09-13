@@ -19,6 +19,7 @@ class DoingActivity : BaseActivity() {
         val todoBean: TodoListEntity = intent.getSerializableExtra("data") as TodoListEntity
         doingView.setTodoData(todoBean)
         doingView.setOnStopListener { finish() }
+        doingView.setFragmentManager(supportFragmentManager)
 
     }
 

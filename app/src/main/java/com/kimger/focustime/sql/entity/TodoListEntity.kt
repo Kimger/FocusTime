@@ -11,6 +11,7 @@ data class TodoListEntity(
     var id: Int = 0,
     var title: String = "",
     var time: Long = 0L,
+    var finishNumber: Int = 0,
     var backgroundId: Int = Helper.get().getRandomBackground()
 ) : Serializable {
     constructor(title: String, time: Long) : this() {
