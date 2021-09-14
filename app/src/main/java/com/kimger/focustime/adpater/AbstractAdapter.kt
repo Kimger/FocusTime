@@ -85,9 +85,10 @@ public abstract class AbstractAdapter<ITEM>(var itemList: MutableList<ITEM>, pri
             }
             itemList = items
         } else {
+            itemList = items
             if (mEmptyType != 1 && emptyLayout != 0) {
                 mEmptyType = 1
-                notifyItemInserted(0)
+                notifyItemChanged(0)
             }else{
                 itemList = items
                 notifyDataSetChanged()
@@ -111,11 +112,11 @@ public abstract class AbstractAdapter<ITEM>(var itemList: MutableList<ITEM>, pri
             itemList = items
             notifyDataSetChanged()
         } else {
+            itemList = items
             if (mEmptyType != 1 && emptyLayout != 0) {
                 mEmptyType = 1
-                notifyItemInserted(0)
+                notifyItemChanged(0)
             }else{
-                itemList = items
                 notifyDataSetChanged()
             }
         }

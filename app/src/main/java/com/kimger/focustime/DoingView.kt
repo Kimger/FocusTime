@@ -19,6 +19,7 @@ import com.kimger.focustime.sql.entity.TodoListEntity
 import com.kimger.focustime.sql.entity.TodoRecordEntity
 import com.lzf.easyfloat.EasyFloat
 import com.lzf.easyfloat.enums.ShowPattern
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.dialog_add_todo.*
 import kotlinx.android.synthetic.main.view_doing.view.*
 
@@ -134,29 +135,44 @@ class DoingView : LinearLayout {
                 return@setOnClickListener
             }
             progressCircular.stop()
-            EasyFloat.with(context)
-                .setTag("exit")
-                .setGravity(Gravity.CENTER)
-                .setAnimator(null)
-                .setLayout(R.layout.dialog_exit_doing) {
-                    val tvPositive = it.findViewById<TextView>(R.id.tv_positive)
-                    val tvNegative = it.findViewById<TextView>(R.id.tv_negative)
-                    tvPositive.setOnClickListener {
-                        EasyFloat.dismiss("exit")
-                        progressCircular.resume()
-                    }
-                    tvNegative.setOnClickListener {
-                        if (this::stopListener.isInitialized) {
-                            stopListener()
-                            saveRecord(2, data)
-                        }
-                        EasyFloat.dismiss("exit")
+            val lockMode = Hawk.get("lockMode", 0)
+            if (lockMode == 0) {
+                val exitDoingDialog = ExitDoingDialog()
+                exitDoingDialog.show(fragmentManager)
+                exitDoingDialog.setOnPositiveClick {
+                    progressCircular.resume()
+                }
+                exitDoingDialog.setOnNegativeClick {
+                    if (this::stopListener.isInitialized) {
+                        stopListener()
+                        saveRecord(2, data)
+                        exitDoingDialog.dismiss()
                     }
                 }
-                .setImmersionStatusBar(true)
-                .setShowPattern(ShowPattern.ALL_TIME)
-                .show()
-
+            } else {
+                EasyFloat.with(context)
+                    .setTag("exit")
+                    .setGravity(Gravity.CENTER)
+                    .setAnimator(null)
+                    .setLayout(R.layout.dialog_exit_doing) {
+                        val tvPositive = it.findViewById<TextView>(R.id.tv_positive)
+                        val tvNegative = it.findViewById<TextView>(R.id.tv_negative)
+                        tvPositive.setOnClickListener {
+                            EasyFloat.dismiss("exit")
+                            progressCircular.resume()
+                        }
+                        tvNegative.setOnClickListener {
+                            if (this::stopListener.isInitialized) {
+                                stopListener()
+                                saveRecord(2, data)
+                            }
+                            EasyFloat.dismiss("exit")
+                        }
+                    }
+                    .setImmersionStatusBar(true)
+                    .setShowPattern(ShowPattern.ALL_TIME)
+                    .show()
+            }
         }
     }
 
